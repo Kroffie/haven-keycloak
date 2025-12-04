@@ -1,8 +1,8 @@
 package nl.havencommunitycrew.keycloak;
 
 import org.keycloak.Config;
-import org.keycloak.authentication.Authenticator;
-import org.keycloak.authentication.AuthenticatorFactory;
+import org.keycloak.authentication.FormAction;
+import org.keycloak.authentication.FormActionFactory;
 import org.keycloak.models.AuthenticationExecutionModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
@@ -11,9 +11,8 @@ import org.keycloak.provider.ProviderConfigProperty;
 import java.util.Collections;
 import java.util.List;
 
-public class DefaultAttributeAuthenticatorFactory implements AuthenticatorFactory {
-
-    public static final String PROVIDER_ID = "default-attribute-setter";
+public class DefaultAttributeFormActionFactory implements FormActionFactory {
+    public static final String PROVIDER_ID = "default-validated-setter";
 
     @Override
     public String getDisplayType() {
@@ -45,7 +44,7 @@ public class DefaultAttributeAuthenticatorFactory implements AuthenticatorFactor
 
     @Override
     public String getHelpText() {
-        return "Set validated to no if no value is provided";
+        return "Sets validated=no during registration";
     }
 
     @Override
@@ -54,23 +53,20 @@ public class DefaultAttributeAuthenticatorFactory implements AuthenticatorFactor
     }
 
     @Override
-    public Authenticator create(KeycloakSession keycloakSession) {
-        return new DefaultAttributeAuthenticator();
+    public FormAction create(KeycloakSession session) {
+        return new DefaultAttributeFormAction();
     }
 
     @Override
-    public void init(Config.Scope scope) {
-
+    public void init(Config.Scope config) {
     }
 
     @Override
-    public void postInit(KeycloakSessionFactory keycloakSessionFactory) {
-
+    public void postInit(KeycloakSessionFactory factory) {
     }
 
     @Override
     public void close() {
-
     }
 
     @Override
