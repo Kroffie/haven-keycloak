@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class DefaultAttributeAuthenticatorFactory implements AuthenticatorFactory {
+
+    public static final String PROVIDER_ID = "default-attribute-setter";
+
     @Override
     public String getDisplayType() {
         return "Set default attribute validated (no)";
@@ -72,6 +75,6 @@ public class DefaultAttributeAuthenticatorFactory implements AuthenticatorFactor
 
     @Override
     public String getId() {
-        return "default-validated-setter";
+        return PROVIDER_ID;
     }
 }
